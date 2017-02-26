@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Social Network</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-slides (ionSlideDidChange)="slideChanged()" >
+  <ion-slide>xxx</ion-slide>
+    <ion-slide  *ngFor="let item of streamData;" style="background-color: white">
+      <ion-card class="center">
+        <ion-item>
+          <ion-avatar item-left>
+            <img src="{{item.author.profile_picture}}">
+          </ion-avatar>
+            <h2>{{item.author.name}}</h2>
+            <p>{{item.stream.date}}</p>
+        </ion-item>
+
+        <img src="{{item.stream.url}}" *ngIf="item.stream.type=='img'" />
+        <div *ngIf="item.stream.type=='video'"  [innerHTML]="item.stream.html"></div>
+
+        <div *ngIf="item.stream.type=='upload'" >
+          <div *ngFor="let file of item.stream.files;" >
+            <img src="{{file.src}}" />  
+          </div>
+        </div>
+
+        <ion-card-content>
+          <ion-card-title>
+          {{item.stream.type}}
+          </ion-card-title>
+            
+          <div class="e2e-inner-html-bound" [innerHTML]="item.stream.text"></div>
+        </ion-card-content>
+
+      </ion-card>
+
+      
+      
+
+      
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>
